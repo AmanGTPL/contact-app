@@ -26,4 +26,5 @@ Route::controller(PersonController::class)->prefix('person')->name('person')->mi
 	Route::put('/{person}/update', 'update')->name('.update');
 	Route::delete('/{person}/destroy', 'destroy')->name('.destroy');
 });
+
 require __DIR__.'/auth.php';

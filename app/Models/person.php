@@ -11,4 +11,8 @@ class person extends Model
     /** @use HasFactory<\Database\Factories\PersonFactory> */
     use HasFactory;
 	use SoftDeletes;
+
+	public function business(){
+		return $this->belongsTo(Business::class);
+	}
 }

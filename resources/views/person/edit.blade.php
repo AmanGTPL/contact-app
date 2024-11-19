@@ -31,11 +31,12 @@
 								<input class="block w-full" type="text" name="phone" id="phone" value="{{old('phone', $person->phone)}}">
 							</span>
 						</div>
-						<div class="mt-6 flex item-center justify-end gap-x-6 ml-3">
-							<a class="bg-red-600 text-black rounded-full py-0 px-3 mr-6" href="{{route('person.index')}}">Cancel</a>
-							<button class="bg-red-600 text-black rounded-full py-0 px-3" type="submit">Save</button>
+						<div class="mt-6 flex item-center justify-end gap-x-6">
+							<button class="bg-green-600 text-black rounded-full py-0 px-3" type="submit">Save</button>
+							<a class="bg-red-600 text-black rounded-full py-0 px-3" href="{{route('person.index')}}">Cancel</a>
+
 						</div>
-		
+
 					</form>
 					<form action="{{route('person.destroy',$person->id)}}" method="POST">
 						@csrf
@@ -46,7 +47,7 @@
 							</h3>
 							<p>You can delete this person here</p>
 							<button class="bg-red-600 text-black rounded-full py-0 px-3" type="submit">Delete</button>
-					    </div>
+						</div>
 					</form>
 				</div>
 			</div>

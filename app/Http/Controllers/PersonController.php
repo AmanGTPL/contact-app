@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Person;
+use App\Models\Business;
 use Illuminate\Http\Request;
 
 class PersonController extends Controller
@@ -13,8 +14,8 @@ class PersonController extends Controller
     public function index()
     {
         //
-		$people = person::all();
-		return view('person.index')->with('people',Person::all());
+		// $people =person::all();
+		return view('person.index')->with('people', Person::all());
     }
 
     /**
@@ -22,8 +23,7 @@ class PersonController extends Controller
      */
     public function create()
     {
-      
-		return view('person.create');
+		return view('person.create')->with('businesses', Business::all());
     }
 
     /**
@@ -32,20 +32,28 @@ class PersonController extends Controller
     public function store(Request $request)
     {
         //
-		$validated = $request->validate([
+		// $validated = $request->validate([
+		// 	'firstname' => 'required',
+		// 	'lastname' => 'required',
+		// 	'email' => 'nullable|email',
+		// ]);
+		$request->validate([
 			'firstname' => 'required',
 			'lastname' => 'required',
-			'email' => 'nullable|email',
-		]);
+			'email' => 'required|email',
+			'phone' => 'required|numeric|digits:10',
+		]
+		);
 
 		$person = new Person;
 		$person -> firstname = $request->input('firstname');
 		$person -> lastname = $request->input('lastname');
 		$person -> email = $request->input('email');
 		$person -> phone = $request->input('phone');
+		$person -> business_id = $request->input('business_id');
 		$person -> save();
 
-		return redirect(route('person.index'));
+		return redirect(route('person.index'))->with('message','Person Create Successfully');
     }
 
     /**
@@ -62,7 +70,8 @@ class PersonController extends Controller
     public function edit(Person $person)
     {
         //
-		return view('person.edit')->with('person',$person);
+		
+		return view('person.edit')->with(['person'=>$person, 'businesses'=>Business::all()]);
     }
 
     /**
@@ -71,19 +80,27 @@ class PersonController extends Controller
     public function update(Request $request, Person $person)
     {
         //
-		$validated = $request->validate([
+		// $validated = $request->validate([
+		// 	'firstname' => 'required',
+		// 	'lastname' => 'required',
+		// 	'email' => 'nullable|email',
+		// ]);
+		$request->validate([
 			'firstname' => 'required',
 			'lastname' => 'required',
-			'email' => 'nullable|email',
-		]);
+			'email' => 'required|email',
+			'phone' => 'required|numeric|digits:10',
+		]
+		);
 
 		$person -> firstname = $request->input('firstname');
 		$person -> lastname = $request->input('lastname');
 		$person -> email = $request->input('email');
 		$person -> phone = $request->input('phone');
+		$person -> business_id = $request->input('business_id');
 		$person -> save();
 
-		return redirect(route('person.index'));
+		return redirect(route('person.index'))->with('message','Person Update Successfully');
     }
 
     /**
@@ -93,6 +110,6 @@ class PersonController extends Controller
     {
         //
 		$person->delete();
-		return redirect(route('person.index'));
+		return redirect(route('person.index'))->with('Delete','Person Deleted Successfully');
     }
 }

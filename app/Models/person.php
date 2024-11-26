@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class person extends Model
+class Person extends Model
 {
     /** @use HasFactory<\Database\Factories\PersonFactory> */
     use HasFactory;
 	use SoftDeletes;
+
+	protected $with = ['business'];
 
 	public function business(){
 		return $this->belongsTo(Business::class);

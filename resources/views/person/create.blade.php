@@ -16,24 +16,58 @@
 							<span class="sm:col-span-3">
 								<label class="block" for="firstname">First Name</label>
 								<input class="block w-full" type="text" name="firstname" id="firstname" value="{{old('firstname')}}">
+								<span class="text-red-600">
+									@error('firstname')
+									{{$message}}
+									@enderror
+								</span>
 							</span>
 							<span class="sm:col-span-3">
 								<label class="block" for="lastname">Last Name</label>
 								<input class="block w-full" type="text" name="lastname" id="lastname" value="{{old('lastname')}}">
+								<span class="text-red-600">
+									@error('lastname')
+									    {{$message}}
+									@enderror
+								</span>
 							</span>
 							<span class="sm:col-span-3">
 								<label class="block" for="email">Email</label>
 								<input class="block w-full" type="text" name="email" id="email" value="{{old('email')}}">
+								<span class="text-red-600">
+									@error('email')
+									    {{$message}}
+									@enderror
+								</span>
 							</span>
 							<span class="sm:col-span-3">
 								<label class="block" for="phone">Phone</label>
-								<input class="block w-full" type="text" name="phone" id="phone" value="{{old('phone')}}">
+								<input class="block w-full" maxlength="10" pattern="\d{10}" type="text" name="phone" id="phone" value="{{old('phone')}}" >
+								<span class="text-red-600">
+									@error('phone')
+								    	{{$message}}
+									@enderror
+								</span>
+							</span>
+							<span class="sm:col-span-3">
+								<label for="business" class="block">Business</label>
+								<select class="block w-full" name="business_id" id="business_id">
+									 <option value="" selected>(No business)</option>
+									@foreach ($businesses as $business )
+										<option value="{{$business->id}}" @selected($business->id == old('business_id'))>
+											{{$business->Business_name}}
+										</option>
+									@endforeach
+								</select>
+								
 							</span>
 						</div>
 						<div class="mt-6 flex item-center justify-end gap-x-6 ml-3">
-							<a class="bg-red-600 text-black rounded-full py-0 px-3 mr-6" href="{{route('person.index')}}">Cancel</a>
-							<button class="bg-red-600 text-black rounded-full py-0 px-3" type="submit">Save</button>
+							<button class=" text-white rounded-full py-2 px-3" style="background-color: green; margin-right:5px;" type="submit">Save</button>
+							<a class="bg-red-600 text-white rounded-full py-2 px-3" href="{{route('person.index')}}">Cancel</a>
+							
 						</div>
+
 		
 					</form>
 				</div>

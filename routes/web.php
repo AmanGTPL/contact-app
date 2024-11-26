@@ -28,3 +28,4 @@ Route::controller(PersonController::class)->prefix('person')->name('person')->mi
 });
 
 require __DIR__.'/auth.php';
+

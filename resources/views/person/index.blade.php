@@ -1,3 +1,7 @@
+{{-- @section('css')
+	<link rel="stylesheet" href="//cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+@endsection --}}
+
 <x-app-layout>
 	<x-slot name="header">
 		<h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -12,10 +16,11 @@
 
 					<div class="flex item-center justify-end">
 						<!-- <a class="bg-blue-600 text-white py-2 px-3 rounded-full" href="{{route('person.create')}}">Add Person</a> -->
-						<a class="bg-red-600 text-white py-2 px-3 rounded-full" href="{{route('person.create')}}">Add Person</a>
+						<a class=" text-white py-3 px-3 rounded-full" style="background-color: green;" href="{{route('person.create')}}">Add Person</a>
 					</div>
 
-					<table class="table-fixed border-separate border-spacing-6 text-center">
+					{{-- table-fixed border-separate border-spacing-6 text-center --}}
+					<table id="mytable" class="">
 						<thead>
 							<tr>
 								<th>Name</th>
@@ -38,7 +43,7 @@
 									{{$person->phone}}
 								</td>
 								<td>
-									{{$person->business?->business_name}}
+									{{$person->business?->Business_name}}
 								</td>
 								<td>
 									<a href="{{route('person.edit', $person->id)}}">
@@ -51,8 +56,37 @@
 							@endforeach
 						</tbody>
 					</table>
+					@if (Session::has('message'))
+						<script>
+							swal("Message","{{Session::get('message')}}",'success',{
+								button:true,
+								button:"OK",
+								timer:3000,
+							});
+						</script>
+					@endif
+
+					@if (Session::has('Delete'))
+					<script>
+						swal("Message","{{Session::get('Delete')}}",'error',{
+							button:true,
+							button:"OK",
+							timer:3000,
+						});
+					</script>
+					@endif
 				</div>
 			</div>
 		</div>
 	</div>
 </x-app-layout>
+{{-- @push('scripts')
+	<script src="//cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+
+	<script>
+		let table = new DataTable('#mytable');
+		// $(document).ready(function () { 
+		// 	$('#mytable).DataTable();
+		// });
+	</script>
+@endpush --}}

@@ -58,8 +58,10 @@
                         @endif
                     </header>
 
-                    <main class="mt-6">
-                        <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
+                    <main class="mt-6" style="width: auto;
+    height: 75vh;">
+	<h1 class="text-center" style="margin: 10em; font-size:25px">Welcome, Please Register or Login to Our Website</h1>
+                        {{-- <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
                             <a
                                 href="https://laravel.com/docs"
                                 id="docs-card"
@@ -163,7 +165,7 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </main>
 
                     <footer class="py-16 text-center text-sm text-black dark:text-white/70">
@@ -172,5 +174,6 @@
                 </div>
             </div>
         </div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </body>
 </html>
